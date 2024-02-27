@@ -3,25 +3,114 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-color: #023047;
+  --background-color-blur: rgba(2, 48, 71, 0.80);
+  --background-color-darker-blur: rgba(2, 40, 59, 0.80);
+  --background-color-lighter: #035177;
+  --color-1: #FFB703;
+  --color-1-transparent: rgba(255, 183, 3, 0.69);
+  --color-1-lighter: #FFD15C;
+  --color-2: #219EBC;
+  --color-2-transparent: rgba(33, 158, 188, 0.25);
+  --color-3: #8ECAE6;
+  --color-4: #000000;
+
+  /* Squares */
+  --square-border-radius: 5px;
+
+  /* Navbar */
+  --navbar-height: 64px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* Add default background color */
+html,
+body,
+body > div {
+  background-color: var(--background-color);
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* Remove default margins */
+div,
+body,
+h1,
+h2,
+h3,
+h4,
+pre,
+p,
+figure,
+blockquote,
+dl,
+dd,
+a,
+section {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  color: var(--color-3);
+  font-size: 1rem;
+}
+h2 {
+  font-size: 1.5rem;
+  color: var(--color-2);
+  margin: 2rem 0 2rem 0;
+}
+h1 {
+  font-size: 2.25rem;
+  color: var(--color-2);
+  margin: 2rem;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  z-index: 5;
+}
+
+button {
+  background: var(--background-color);
+  border: solid 2px;
+  font: inherit;
+  line-height: 1;
+  padding: 0.75rem;
+  margin-bottom: 0.3rem;
+  border-color: var(--color-2);
+  color: var(--color-2);
+  transition: all linear 0.2s;
+  border-radius: var(--square-border-radius);
+}
+button:disabled {
+  opacity: 0.4;
+}
+button:hover:not(:disabled) {
+  box-shadow: inset 0 0 0 1.5rem var(--background-color);
+  cursor: pointer;
+  border-color: var(--color-1) !important;
+  color: var(--color-1) !important;
+}
+button.activated {
+  color: var(--color-1);
+}
+
+img {
+  transition: all 0.3s ease;
+}
+
+.context-container {
+  display: flex;
+  justify-content: center;
+  z-index: 3;
+  background-color: transparent;
+  animation: fadeIn 0.7s ease-in-out forwards;
+}
+
+.context {
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--navbar-height);
+  max-width: min(1000px, 70vw);
+  width: 100%;
+  min-width: 800px;
 }
