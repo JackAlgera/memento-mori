@@ -1,15 +1,11 @@
 'use client';
 
-import {MEMENTO_MORI} from '../../../../_mocks/mocks';
 import {WeekContainer} from '@/app/week-container';
-
-const YEAR = MEMENTO_MORI.years[29];
+import {useGetYear} from '@/_services/services.hook';
 
 export default function Page({ params }: { params: { year: number } }) {
+  const year = useGetYear(params.year);
 
-  const year = YEAR;
-  console.log('Year', params.year);
-  console.log(year);
   return (
     <div className='flex flex-col items-center'>
       {new Array(4).fill(0).map((_, index) => (

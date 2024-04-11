@@ -10,4 +10,5 @@ export interface Year {
 export interface Week {
   week: number;
   isChecked: boolean;
+  isCheckable: boolean;
 }
