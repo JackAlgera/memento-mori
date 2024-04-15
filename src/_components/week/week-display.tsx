@@ -13,8 +13,8 @@ export const WeekDisplay = (props: WeekContainerProps) => {
   };
 
   return (
-    <svg onClick={handleOnClick} viewBox="0 0 100 100">
-      <rect className={styles.rect} rx="17" fill={props.color} width='100' height='100'/>
+    <svg onClick={handleOnClick} viewBox='0 0 100 100'>
+      <rect className={styles.rect} rx='17' fill={props.color} width='100' height='100'/>
     </svg>
   );
 };

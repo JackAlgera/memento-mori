@@ -26,3 +26,7 @@ export const MEMENTO_MORI_MOCK: MementoMori = {
       })
     } as Year;
   })};
+
+MEMENTO_MORI_MOCK.years[29].weeks[10].messages = ['Something cool happened!', 'You are born!'];
+MEMENTO_MORI_MOCK.years[29].weeks[9].messages = ['Oh snap, this was such a cool week', 'In your life!'];
+MEMENTO_MORI_MOCK.years[29].weeks[8].messages = ['Dang son!'];

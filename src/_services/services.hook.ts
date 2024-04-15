@@ -19,5 +19,9 @@ export const useWeeksApi = () => {
     MEMENTO_MORI_MOCK.years[year].weeks[week].isChecked = true;
   };
 
-  return {checkWeek};
+  const getWeekTexts = (year: number, week: number) => {
+    return MEMENTO_MORI_MOCK.years[year].weeks[week].messages;
+  };
+
+  return {checkWeek, getWeekTexts};
 };
