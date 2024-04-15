@@ -35,6 +35,9 @@ export default function Page({ params }: { params: { year: number } }) {
   };
 
   const getFillColor = (week: Week) => {
+    if (clickedWeek && week.weekNumber === clickedWeek!.weekNumber) {
+      return 'var(--color-6)';
+    }
     if (week.isChecked) {
       return 'var(--color-2)';
     }
