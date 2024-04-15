@@ -1,8 +1,8 @@
-import './globals.css';
+import './globals.scss';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Source_Code_Pro } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const sourceCodePro = Source_Code_Pro({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Memento Mori',
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={sourceCodePro.className}>
         <div className="context-container">
           <div className="context">
             {children}

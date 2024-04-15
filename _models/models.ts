@@ -3,12 +3,14 @@ export interface MementoMori {
 }
 
 export interface Year {
-  year: number;
+  yearIndex: number;
+  date: Date;
   weeks: Week[];
 }
 
 export interface Week {
-  week: number;
+  weekNumber: number;
+  date: Date;
   isChecked: boolean;
-  isCheckable: boolean;
+  messages: string[];
 }

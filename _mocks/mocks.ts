@@ -1,58 +1,28 @@
-import {MementoMori, Week} from '../_models/models';
+import {MementoMori, Week, Year} from '../_models/models';
 
 const COUNT_WEEKS = 52;
 const COUNT_YEARS = 80;
 
-const FULL_YEAR = [
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1
-];
-
-const EMPTY_YEAR = [
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0
-];
-
-const GLOBAL = [
-  FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR,
-  FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR,
-  FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR, FULL_YEAR,
-  [
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0,0
-  ],
-  EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR,
-  EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR,
-  EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR,
-  EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR,
-  EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR, EMPTY_YEAR,
-  EMPTY_YEAR, EMPTY_YEAR
-];
-
-const NOW = new Date();
 const BIRTHDAY = new Date('1995-01-01');
 
-export const MEMENTO_MORI: MementoMori = {
-  years: GLOBAL.map((year: number[], yearIndex) => (
-    {
-      weeks: year.map((checked, index) => ({
-        isChecked: checked === 1,
-        week: index,
-        isCheckable: new Date(BIRTHDAY.getFullYear() + yearIndex, 0, 1) < NOW
-      } as Week)),
-      year: yearIndex
-    }))
+const getYear = (offset: number) : Date => {
+  const year = new Date(BIRTHDAY.getTime());
+  year.setFullYear(year.getFullYear() + offset);
+  return year;
 };
 
+export const MEMENTO_MORI_MOCK: MementoMori = {
+  years: new Array(COUNT_YEARS).fill(0).map((_, yearIndex) => {
+    return {
+      yearIndex: yearIndex,
+      date: getYear(yearIndex),
+      weeks: new Array(COUNT_WEEKS).fill(0).map((_, weekIndex) => {
+        return {
+          weekNumber: weekIndex,
+          date: new Date(BIRTHDAY.getTime() + yearIndex * 365 * 24 * 60 * 60 * 1000 + weekIndex * 7 * 24 * 60 * 60 * 1000),
+          isChecked: yearIndex < 29 || (yearIndex == 29 && weekIndex < 10),
+          messages: []
+        } as Week;
+      })
+    } as Year;
+  })};
