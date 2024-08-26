@@ -8,6 +8,7 @@ import {isDatePast} from '@/_services/utilities.service';
 import {WeekDisplay} from '@/_components/week/week-display';
 import styles from './page.module.scss';
 import {WeekTextsDisplay} from '@/app/years/[year]/week-texts-display';
+import {Modal} from '@/_components/modals/modal';
 
 export default function Page({ params }: { params: { year: number } }) {
   const router = useRouter();
@@ -56,7 +57,10 @@ export default function Page({ params }: { params: { year: number } }) {
     <div className='flex flex-col items-center gap-2'>
       <button onClick={() => router.push('/')} className='m-4'>Back</button>
       <div className='flex flex-col rounded-lg bg-[var(--color-5)] p-2 gap-1'>
-        <h1>{year.date.getFullYear()}</h1>
+        <div className='flex flex-row'>
+          <h1>{year.date.getFullYear()}</h1>
+          <Modal/>
+        </div>
         {new Array(6).fill(0).map((_, index) => (
           <div className='flex flex-row gap-1 hover:cursor-pointer' key={`row-${index}`}>
             {year.weeks.slice(index * 10, (index + 1) * 10).map((week, weekIndex) => (
